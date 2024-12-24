@@ -1,0 +1,71 @@
+package maha;
+import java.io.BufferedReader;
+
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.Random;
+
+public class GuessTheNumberGame {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        Random random = new Random();
+        boolean playAgain = true;
+        int tRounds = 0;
+        int Score = 0;
+
+        System.out.println("Hi!!, Welcome to the Random Number Guessing Game!\n");
+
+        while (playAgain) {
+            tRounds++;
+            int tNumber = random.nextInt(100) + 1; 
+            int a = 0;
+            int m = 5;
+
+            
+            System.out.println("we have generated a number between 1 and 100. You are given a challenge to guess the perfect Number Are you ready for the game !!\n");
+            System.out.println("You have " + m + " attempts to finish this game, Letzzz Gooo.\n\n");
+
+            boolean guessedCorrectly = false;
+            while (a < m) {
+                System.out.print("Enter your value number to Guess: ");
+                int g;
+
+                try {
+                    g = Integer.parseInt(reader.readLine());
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter a valid number to guess a random number!!.");
+                    continue;
+                }
+
+                a++;
+
+                if (g == tNumber) {
+                    System.out.println("Correct! You guessed the number in " + a + " attempts.");
+                    Score += (m - a + 1);
+                    guessedCorrectly = true;
+                    break;
+                } else if (g < tNumber) {
+                    System.out.println("you have guesses the number Too low!");
+                } else {
+                    System.out.println("you have guesses the number Too high!");
+                }
+
+                System.out.println("your Attempts left: " + (m - a));
+            }
+
+            if (!guessedCorrectly) {
+                System.out.println("\nOOPS!! You've used all your attempts Better luck for the next game!!. The correct number was: " + tNumber);
+            }
+
+            System.out.print("\nDo you want to play the next guessing number game round? if YES/NO Enter the option to proceed. (yes/no): ");
+            String response = reader.readLine().trim().toLowerCase();
+            if (!response.equals("yes")) {
+                playAgain = false;
+                System.out.println("Thank You For Choosing the Game!!\n Your Results will be displayed below ");
+                System.out.println("Total Rounds Played: " + tRounds);
+                System.out.println("Your Total Score: " + Score);
+            }
+        }
+    }
+}
