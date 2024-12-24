@@ -1,0 +1,92 @@
+package maha;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class bank {
+    public static void main(String[] args) throws Exception {
+        int sel;
+        bank_details A = new bank_details();
+        sel = A.display();
+        switch (sel) {
+            case 1:
+                A.deposit();
+                break;
+            case 2:
+                A.withdrawal();
+                break;
+            case 3:
+                A.checkBalance();
+                break;
+            default:
+                System.out.println("Invalid Option. Please choose a valid option (1, 2, or 3).");
+        }
+    }
+}
+
+class customer {
+    String name = "CR";
+    int accNo = 12768;
+    int balance = 50500;
+    int sel;
+
+    int display() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Hello " + name + "\n" + "Your Account Number: " + accNo);
+        System.out.println("Choose an option:" + "\n1. Deposit Amount" + "\n2. Withdraw Amount" + "\n3. Check Balance" + "\nEnter your choice:");
+        try {
+            sel = Integer.parseInt(br.readLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number (1, 2, or 3).");
+            sel = 0; 
+        }
+        return sel;
+    }
+}
+
+class bank_details extends customer {
+    final int Max_withdraw = 1000; 
+    final int Min_depsoit = 1; 
+    final int Max_deposit= 5000; 
+    public void deposit() throws Exception {
+        int depoAmt;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter Amount To Deposit:");
+        try {
+            depoAmt = Integer.parseInt(br.readLine());
+            if (depoAmt <= Min_depsoit) {
+                System.out.println("Invalid deposit amount. Please enter an amount greater than 0.");
+            } else if (depoAmt > Max_deposit) {
+                System.out.println("Deposit amount exceeds the maximum allowed limit of " + Max_deposit + ". Please enter a lower amount.");
+            } else {
+                balance += depoAmt;
+                System.out.println("Deposit successful! Your Current Balance Amount: " + balance + "\nThank You For Using Our Service.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid numerical amount.");
+        }
+    }
+
+    public void withdrawal() throws Exception {
+        int withdrawAmt;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter Amount To Withdraw:");
+        try {
+            withdrawAmt = Integer.parseInt(br.readLine());
+            if (withdrawAmt <= 0) {
+                System.out.println("Invalid withdrawal amount. Please enter an amount greater than 0.");
+            } else if (withdrawAmt > balance) {
+                System.out.println("Insufficient Balance! Transaction Failed.");
+            }  else {
+                balance -= withdrawAmt;
+                System.out.println("Withdrawal successful! Your Current Balance Amount: " + balance + "\nThank You For Using Our Service.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid numerical amount.");
+        }
+    }
+
+    public void checkBalance() {
+        System.out.println("Your Current Balance Amount: " + balance + "\nThank You For Using Our Service.");
+    }
+}
