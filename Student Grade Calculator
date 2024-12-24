@@ -1,0 +1,56 @@
+package maha;
+import java.io.*;
+
+public class average_1 {
+
+    public static void main(String[] args) throws IOException {
+        String name, regno, dept;
+        int pyth, dl, wd;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+         System.out.println("Enter the Student name:");
+         name = br.readLine();
+        System.out.println("Enter the Department name:");
+        dept = br.readLine();
+        System.out.println("Enter the Register Number:");
+        regno = br.readLine();
+        System.out.println("Enter the Python marks (out of 100):");
+        pyth = Integer.parseInt(br.readLine());
+         System.out.println("Enter the Digital marks (out of 100):");
+        dl = Integer.parseInt(br.readLine());
+        System.out.println("Enter the Web Design marks (out of 100):");
+        wd = Integer.parseInt(br.readLine());
+        int total = pyth + dl + wd;
+        double a = total / 3.0; 
+        String grade;
+        if (a>= 90) {
+            grade = "A+";
+        } else if (a>= 80) {
+            grade = "A";
+        } else if (a>= 70) {
+            grade = "B+";
+        } else if (a>= 60) {
+            grade = "B";
+        } else if (a>= 50) {
+            grade = "C+";
+        } else if (a>= 40) {
+            grade = "C";
+        } else {
+            grade = "D"; 
+        }
+        
+        System.out.println("\n -----Student Report-----");
+        System.out.println("Name: " + name);
+        System.out.println("Department: " + dept);
+        System.out.println("Register Number: " + regno);
+        System.out.println("Your Total Marks: " + total + " / 300");
+        System.out.println("Your Average Percentage: " + a + "%");
+        System.out.println("Your Grade: " + grade);
+    }
+}
+
+        
+        
+       
+        
+       
+        
