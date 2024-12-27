@@ -1,0 +1,46 @@
+package maha;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class CurrencyConvertion {
+
+    public static void main(String[] args) {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.print("Enter the currency: ");
+            String bCurrency = reader.readLine().toUpperCase();
+            System.out.print("Enter the currency Which You have to Convert : ");
+            String tCurrency = reader.readLine().toUpperCase();
+            System.out.print("Enter amount in " + bCurrency + ": ");
+            double a = Double.parseDouble(reader.readLine());
+            double e = 0.0;
+
+            if (bCurrency.equals("USD") && tCurrency.equals("INR")) {
+                e = 85.00;
+            } else if (bCurrency.equals("INR") && tCurrency.equals("USD")) {
+                e = 0.0118;
+            } else if (bCurrency.equals("USD") && tCurrency.equals("EUR")) {
+                e = 0.9580;
+            } else if (bCurrency.equals("EUR") && tCurrency.equals("USD")) {
+                e = 1.0439;
+            } else if (bCurrency.equals("INR") && tCurrency.equals("EUR")) {
+                e = 0.0111;
+            } else if (bCurrency.equals("EUR") && tCurrency.equals("INR")) {
+                e = 90.00;;
+            } else {
+                System.out.println("Conversion Exchange rate is not possible for this Currency!!!");
+                return;
+            }
+
+            
+            double convertedAmount = a * e;
+
+            
+            System.out.println(a + " " + bCurrency + " is equal to " + convertedAmount + " " + tCurrency);
+
+        } catch (Exception e) {
+            System.out.println("Invalid Currency, Enter a Valid Amount to Change the Currency!!.");
+        }
+    }
+}
